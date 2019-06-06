@@ -34,23 +34,29 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room miHabitacion, miBanio, pasillo, habitacionPadres, banioPadres, hall, cocina, salon, salaJuegos;
       
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
-        
-        // initialise room exits
-        outside.setExits(null, theater, lab, pub);
-        theater.setExits(null, null, null, outside);
-        pub.setExits(null, outside, null, null);
-        lab.setExits(outside, office, null, null);
-        office.setExits(null, null, null, lab);
-
-        currentRoom = outside;  // start game outside
+        miHabitacion = new Room("Mi habitación, la misma que tu madre te dice que recojas todos los dias");
+        miBanio = new Room("Mi bañó, sin limpiar desde 1945");
+        pasillo = new Room("El pasillo");
+        habitacionPadres = new Room("La habitación de mis padres, sigo sin comprender donde meten las cosas");
+        banioPadres = new Room("El baño de mis padres, las estanterias están llenas de adornos, colonias y exceso de productos de higiene");
+        hall = new Room("Hall, donde está el telefono fijo, pero como está de adorno, pues de poco me sirve");
+        cocina = new Room("La cocina, de estilo americano con isla, muebles de caoba y encimeras de marmol");
+        salon = new Room("El salón, hay una mesa mesa grande rodeada de silla y una tele del tamaño de la pared, si compramos otra mas grande nos tendremos que ir de casa");
+        salaJuegos = new Room("Esta es la puerta de la habitación que siempre está cerrada, mejor me voy de aquí...Antes de ver algo fuera de contexto...");
+        // initialise room exits n e s o
+        miHabitacion.setExits(null, miBanio, pasillo, null);
+        miBanio.setExits(null, miHabitacion, null, null);
+        pasillo.setExits(miHabitacion, salaJuegos, habitacionPadres, hall);
+        habitacionPadres.setExits(pasillo, null, null, banioPadres);
+        banioPadres.setExits(null, habitacionPadres, null, null);
+        hall.setExits(salon, pasillo, cocina, null);
+        cocina.setExits(hall, null, null, null);
+        salon.setExits(null, null, hall, null);
+        salaJuegos.setExits(null, null, null, pasillo);
+        currentRoom = miHabitacion;  // start game outside
     }
 
     /**
