@@ -77,11 +77,22 @@ public class Room
     public String getExitString(){
         Set <String> nDirecciones = exits.keySet();
         String exitsDesc = "Exit ";
-        
+
         for(String dirActual : nDirecciones){
             exitsDesc = exitsDesc + dirActual + " ";
         }
-        
+
         return exitsDesc;
     }
+
+    /**
+     * Devuelve un texto con la descripcion larga de la habitacion del tipo:
+     *     You are in the 'name of room'
+     *     Exits: north west southwest
+     * @return Una descripcion de la habitacion incluyendo sus salidas
+     */
+    public String getLongDescription(){
+        return "You are " + description + "\n" + getExitString();
+    }
+
 }
