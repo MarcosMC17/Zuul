@@ -19,6 +19,9 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private Room prevRoom1;
+    private Room prevRoom2;
+    private int contadorBack;
 
     /**
      * Create the game and initialise its internal map.
@@ -27,6 +30,9 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        prevRoom1 = null;
+        prevRoom2 = null;
+        contadorBack = 0;
     }
 
     /**
@@ -66,10 +72,10 @@ public class Game
         salon.setExit("south", hall);
         salon.setExit("southEast", pasillo);
         salaJuegos.setExit("west", pasillo);
-        
+
         salon.addItem(movil);
         salon.addItem(libro);
-        
+
         currentRoom = miHabitacion;  // start game outside
     }
 
@@ -134,6 +140,9 @@ public class Game
         else if (commandWord.equals("eat")) {
             System.out.println("You have eaten now and you are not hungry any more");
         }
+        else if (commandWord.equals("back")) {
+            back();
+        }
 
         return wantToQuit;
     }
@@ -181,8 +190,30 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
+            prevRoom2 = prevRoom1;
+            prevRoom1 = currentRoom;
             currentRoom = nextRoom;
+            contadorBack = 0;
             printLocationInfo();
+        }
+    }
+
+    private void back() 
+    {
+
+        if (prevRoom1 != null) {
+            if(contadorBack <= 1){
+                currentRoom = prevRoom1;
+                prevRoom1 = prevRoom2;
+                contadorBack++;
+                printLocationInfo();
+            }
+            else{
+                System.out.println("Has introducido back 2 o mas veces, debes usar go para moverte al menos una vez para volver a poder ulilizarlo");
+            }
+        }
+        else{
+            System.out.println("No hay habitacion anterior");
         }
     }
 
