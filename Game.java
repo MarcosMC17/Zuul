@@ -145,7 +145,6 @@ public class Game
             System.out.println("You have eaten now and you are not hungry any more");
         }
 
-
         return wantToQuit;
     }
 
@@ -166,7 +165,7 @@ public class Game
         System.out.println("around at the house.");
         System.out.println();
         System.out.println("Your command words are:");
-        parser.showCommands();
+        System.out.println(parser.showCommands());
 
     }
 
