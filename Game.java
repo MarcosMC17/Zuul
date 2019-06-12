@@ -46,16 +46,26 @@ public class Game
         cocina = new Room("La cocina, de estilo americano con isla, muebles de caoba y encimeras de marmol");
         salon = new Room("El salón, hay una mesa mesa grande rodeada de silla y una tele del tamaño de la pared, si compramos otra mas grande nos tendremos que ir de casa");
         salaJuegos = new Room("Esta es la puerta de la habitación que siempre está cerrada, mejor me voy de aquí...Antes de ver algo fuera de contexto...");
-        // initialise room exits n e s o
-        miHabitacion.setExits(null, miBanio, pasillo, null, null, null);
-        miBanio.setExits(null, miHabitacion, null, null, null, null);
-        pasillo.setExits(miHabitacion, salaJuegos, habitacionPadres, hall, null, salon);
-        habitacionPadres.setExits(pasillo, null, null, banioPadres, null, null);
-        banioPadres.setExits(null, habitacionPadres, null, null, null, null);
-        hall.setExits(salon, pasillo, cocina, null, null, null);
-        cocina.setExits(hall, null, null, null, null, null);
-        salon.setExits(null, null, hall, null, pasillo, null);
-        salaJuegos.setExits(null, null, null, pasillo, null, null);
+        // initialise room exits n e s o se nw
+        miHabitacion.setExit("west", miBanio);
+        miHabitacion.setExit("south", pasillo);
+        miBanio.setExit("east", miHabitacion);
+        pasillo.setExit("north", miHabitacion);
+        pasillo.setExit("south", habitacionPadres);
+        pasillo.setExit("east", salaJuegos);
+        pasillo.setExit("west", hall);
+        pasillo.setExit("northWest", salon);
+        habitacionPadres.setExit("north", pasillo);
+        habitacionPadres.setExit("west", banioPadres);
+        banioPadres.setExit("east", habitacionPadres);
+        hall.setExit("east", pasillo);
+        hall.setExit("north", salon);
+        hall.setExit("south", cocina);
+        cocina.setExit("north", hall);
+        salon.setExit("south", hall);
+        salon.setExit("southEast", pasillo);
+        salaJuegos.setExit("west", pasillo);
+
         currentRoom = miHabitacion;  // start game outside
     }
 
@@ -90,16 +100,16 @@ public class Game
         /*System.out.println("You are " + currentRoom.getDescription());
         System.out.print("Exits: ");
         if(currentRoom.northExit != null) {
-            System.out.print("north ");
+        System.out.print("north ");
         }
         if(currentRoom.eastExit != null) {
-            System.out.print("east ");
+        System.out.print("east ");
         }
         if(currentRoom.southExit != null) {
-            System.out.print("south ");
+        System.out.print("south ");
         }
         if(currentRoom.westExit != null) {
-            System.out.print("west ");
+        System.out.print("west ");
         }*/
         printLocationInfo();
     }
@@ -165,7 +175,7 @@ public class Game
         // Try to leave current room.
 
         Room nextRoom = currentRoom.getExit(direction);
-        
+
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
@@ -174,16 +184,16 @@ public class Game
             /*System.out.println("You are " + currentRoom.getDescription());
             System.out.print("Exits: ");
             if(currentRoom.northExit != null) {
-                System.out.print("north ");
+            System.out.print("north ");
             }
             if(currentRoom.eastExit != null) {
-                System.out.print("east ");
+            System.out.print("east ");
             }
             if(currentRoom.southExit != null) {
-                System.out.print("south ");
+            System.out.print("south ");
             }
             if(currentRoom.westExit != null) {
-                System.out.print("west ");
+            System.out.print("west ");
             }*/
             printLocationInfo();
         }
