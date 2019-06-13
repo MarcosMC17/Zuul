@@ -10,8 +10,9 @@ public class Player
     // instance variables - replace the example below with your own
     public Room currentRoom;
     private Stack<Room> prevRooms;
-    
-    
+    private int pesoMochila;
+    private int pesoMax;
+    private HashMap<String, Item> mochila;
 
     /**
      * Constructor for objects of class Player
@@ -19,9 +20,12 @@ public class Player
     public Player(Room currentRoom)
     {
         prevRooms = new Stack<Room>();
+        mochila = new HashMap<>();
+        pesoMochila = 0;
+        pesoMax = 20;
         this.currentRoom = currentRoom;
     }
-    
+
     public void goRoom(Command command) 
     {
         if(!command.hasSecondWord()) {
@@ -45,7 +49,7 @@ public class Player
             look();
         }
     }
-    
+
     public void back() 
     {
 
@@ -57,12 +61,27 @@ public class Player
             System.out.println("No hay habitacion anterior");
         }
     }
-    
+
     public void look() {   
         System.out.println(currentRoom.getLongDescription());
     }
-    
+
     public void eat(){
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println("You have eaten now and you are not hungry any more");
+    }
+
+    public void take(Command command){
+        String obj = command.getSecondWord();
+        if(currentRoom.getItem(obj) != null){
+            mochila.put(obj, currentRoom.getItem(obj));
+            int pesoItem = currentRoom.getItem(obj).getPeso();
+            currentRoom.eliminarItem(obj);                    
+            pesoMochila = pesoMochila + pesoItem;
+        }
+
+        else{
+            System.out.println("Ese objeto no existe o no está en esta sala");
+        }
+
     }
 }

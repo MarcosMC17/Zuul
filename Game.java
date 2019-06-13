@@ -20,9 +20,6 @@ import java.util.*;
 public class Game 
 {
     private Parser parser;
-    private int pesoMochila;
-    private int pesoMax;
-    private HashMap<String, Item> mochila;
     private Player player;
 
     /**
@@ -32,9 +29,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
-        mochila = new HashMap<>();
-        pesoMochila = 0;
-        pesoMax = 20;
+
         player = new Player(createRooms());
     }
 
@@ -147,20 +142,20 @@ public class Game
             player.back();
         }
         else if (commandWord.equals("take")) {
-            take(command);
+            player.take(command);
         }
-        else if (commandWord.equals("drop")) {
+        /*else if (commandWord.equals("drop")) {
             drop(command);
         }
         else if (commandWord.equals("items")) {
             items();
-        }
+        }*/
 
         return wantToQuit;
     }
 
     /*private void look() {   
-        System.out.println(currentRoom.getLongDescription());
+    System.out.println(currentRoom.getLongDescription());
     }**/
 
     // implementations of user commands:
@@ -180,16 +175,16 @@ public class Game
 
     }
 
-    private void items(){
+    /*private void items(){
         String itemsMochila = "";
         Collection <Item> objItem = mochila.values();
         for(Item objActual : objItem){
             itemsMochila = itemsMochila + "\n" + objActual.getInfoItem();
         }
         System.out.println(itemsMochila);
-    }
-    
-    private void drop(Command command){
+    }*/
+
+    /*private void drop(Command command){
         String obj = command.getSecondWord();
         if(mochila.containsKey(obj)){
             player.currentRoom.addItem(mochila.get(obj).getId(), mochila.get(obj));
@@ -199,37 +194,37 @@ public class Game
         else{
             System.out.println("No llevas ese objeto en la mochila");
         }
-    }
+    }*/
 
     /*/** 
      * Try to go in one direction. If there is an exit, enter
      * the new room, otherwise print an error message.
-     
+
     private void goRoom(Command command) 
     {
-        if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
-            return;
-        }
+    if(!command.hasSecondWord()) {
+    // if there is no second word, we don't know where to go...
+    System.out.println("Go where?");
+    return;
+    }
 
-        String direction = command.getSecondWord();
+    String direction = command.getSecondWord();
 
-        // Try to leave current room.
+    // Try to leave current room.
 
-        Room nextRoom = currentRoom.getExit(direction);
+    Room nextRoom = currentRoom.getExit(direction);
 
-        if (nextRoom == null) {
-            System.out.println("There is no door!");
-        }
-        else {
-            prevRooms.push(currentRoom);
-            currentRoom = nextRoom;
-            printLocationInfo();
-        }
+    if (nextRoom == null) {
+    System.out.println("There is no door!");
+    }
+    else {
+    prevRooms.push(currentRoom);
+    currentRoom = nextRoom;
+    printLocationInfo();
+    }
     }**/
 
-    private void take(Command command){
+    /*private void take(Command command){
         String obj = command.getSecondWord();
         if(player.currentRoom.getItem(obj) != null){
             if(player.currentRoom.getItem(obj).getSePuedeCoger()){
@@ -252,19 +247,19 @@ public class Game
             System.out.println("Ese objeto no existe o no está en esta sala");
         }
 
-    }
+    }*/
 
     /*private void back() 
     {
 
-        if (!prevRooms.empty()) {
-            currentRoom = prevRooms.pop();    
-            printLocationInfo();
-        }
+    if (!prevRooms.empty()) {
+    currentRoom = prevRooms.pop();    
+    printLocationInfo();
+    }
 
-        else{
-            System.out.println("No hay habitacion anterior");
-        }
+    else{
+    System.out.println("No hay habitacion anterior");
+    }
     }*/
 
     /** 
@@ -284,8 +279,8 @@ public class Game
     }
 
     /*private void printLocationInfo(){
-        System.out.println(currentRoom.getLongDescription());
+    System.out.println(currentRoom.getLongDescription());
 
-        System.out.println();
+    System.out.println();
     }*/
 }
