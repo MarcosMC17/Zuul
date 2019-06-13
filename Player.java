@@ -117,7 +117,7 @@ public class Player
         }
     }
 
-    /*public void objetoEspecial(Command command){
+    public void objetoEspecial(Command command){
         if(command.getSecondWord().equals("cervecita")){
             if(mochila.containsKey(command.getSecondWord())){
                 mochila.remove(command.getSecondWord());
@@ -131,5 +131,5 @@ public class Player
         else{
                 System.out.println("Yo no me beberia eso, si es que se puede beber");
             }
-    }*/
+    }
 }
