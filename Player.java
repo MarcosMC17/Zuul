@@ -54,7 +54,8 @@ public class Player
     {
 
         if (!prevRooms.empty()) {
-            currentRoom = prevRooms.pop();    
+            currentRoom = prevRooms.pop();   
+            look();
         }
 
         else{
@@ -74,10 +75,15 @@ public class Player
         String obj = command.getSecondWord();
         if(currentRoom.getItem(obj) != null){
             if(currentRoom.getItem(obj).getSePuedeCoger()){
-                mochila.put(obj, currentRoom.getItem(obj));
-                int pesoItem = currentRoom.getItem(obj).getPeso();
-                currentRoom.eliminarItem(obj);                    
-                pesoMochila = pesoMochila + pesoItem;
+                if((pesoMochila + currentRoom.getItem(obj).getPeso()) <= pesoMax){
+                    mochila.put(obj, currentRoom.getItem(obj));
+                    int pesoItem = currentRoom.getItem(obj).getPeso();
+                    currentRoom.eliminarItem(obj);                    
+                    pesoMochila = pesoMochila + pesoItem;
+                }
+                else{
+                    System.out.println("Si coges ese objeto superaras el peso maximo de tu mochila");
+                }
             }
             else{
                 System.out.println("Ese objeto no se puede recoger");
@@ -89,7 +95,7 @@ public class Player
         }
 
     }
-    
+
     public void items(){
         String itemsMochila = "Total en kg: " + pesoMochila + "\n";
         Collection <Item> objItem = mochila.values();
@@ -97,5 +103,17 @@ public class Player
             itemsMochila = itemsMochila + "\n" + objActual.getInfoItem();
         }
         System.out.println(itemsMochila);
+    }
+
+    public void drop(Command command){
+        String obj = command.getSecondWord();
+        if(mochila.containsKey(obj)){
+            currentRoom.addItem(mochila.get(obj).getId(), mochila.get(obj));
+            pesoMochila = pesoMochila - mochila.get(obj).getPeso();
+            mochila.remove(obj);
+        }
+        else{
+            System.out.println("No llevas ese objeto en la mochila");
+        }
     }
 }

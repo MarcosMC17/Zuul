@@ -41,6 +41,7 @@ public class Game
         Room miHabitacion, miBanio, pasillo, habitacionPadres, banioPadres, hall, cocina, salon, salaJuegos;
         Item movil = new Item("movil", "AiFon de ultima generacion", 1, true);
         Item libro = new Item("libro", "Libro de programacion basica en java", 500, false);
+        Item ropaSucia = new Item("ropaSucia", "Un monton de ropa sucia para lavar", 20, true);
         // create the rooms
         miHabitacion = new Room("Mi habitación, la misma que tu madre te dice que recojas todos los dias");
         miBanio = new Room("Mi bañó, sin limpiar desde 1945");
@@ -73,7 +74,7 @@ public class Game
 
         salon.addItem("movil", movil);
         salon.addItem("libro", libro);
-
+        miHabitacion.addItem("ropaSucia",ropaSucia);
         return miHabitacion;  // start game outside
     }
 
@@ -144,9 +145,9 @@ public class Game
         else if (commandWord.equals("take")) {
             player.take(command);
         }
-        /*else if (commandWord.equals("drop")) {
-            drop(command);
-        }*/
+        else if (commandWord.equals("drop")) {
+            player.drop(command);
+        }
         else if (commandWord.equals("items")) {
             player.items();
         }
@@ -168,85 +169,7 @@ public class Game
         System.out.println(parser.showCommands());
 
     }
-
-    /*private void drop(Command command){
-        String obj = command.getSecondWord();
-        if(mochila.containsKey(obj)){
-            player.currentRoom.addItem(mochila.get(obj).getId(), mochila.get(obj));
-            pesoMochila = pesoMochila - mochila.get(obj).getPeso();
-            mochila.remove(obj);
-        }
-        else{
-            System.out.println("No llevas ese objeto en la mochila");
-        }
-    }*/
-
-    /*/** 
-     * Try to go in one direction. If there is an exit, enter
-     * the new room, otherwise print an error message.
-
-    private void goRoom(Command command) 
-    {
-    if(!command.hasSecondWord()) {
-    // if there is no second word, we don't know where to go...
-    System.out.println("Go where?");
-    return;
-    }
-
-    String direction = command.getSecondWord();
-
-    // Try to leave current room.
-
-    Room nextRoom = currentRoom.getExit(direction);
-
-    if (nextRoom == null) {
-    System.out.println("There is no door!");
-    }
-    else {
-    prevRooms.push(currentRoom);
-    currentRoom = nextRoom;
-    printLocationInfo();
-    }
-    }**/
-
-    /*private void take(Command command){
-        String obj = command.getSecondWord();
-        if(player.currentRoom.getItem(obj) != null){
-            if(player.currentRoom.getItem(obj).getSePuedeCoger()){
-                if((pesoMochila + player.currentRoom.getItem(obj).getPeso()) <= pesoMax){
-                    mochila.put(obj, player.currentRoom.getItem(obj));
-                    int pesoItem = player.currentRoom.getItem(obj).getPeso();
-                    player.currentRoom.eliminarItem(obj);                    
-                    pesoMochila = pesoMochila + pesoItem;
-                }
-                else{
-                    System.out.println("Si coges ese objeto superaras el peso maximo de tu mochila");
-                }
-            }
-
-            else{
-                System.out.println("Ese objeto no se puede recoger");
-            }
-        }
-        else{
-            System.out.println("Ese objeto no existe o no está en esta sala");
-        }
-
-    }*/
-
-    /*private void back() 
-    {
-
-    if (!prevRooms.empty()) {
-    currentRoom = prevRooms.pop();    
-    printLocationInfo();
-    }
-
-    else{
-    System.out.println("No hay habitacion anterior");
-    }
-    }*/
-
+    
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
@@ -263,9 +186,4 @@ public class Game
         }
     }
 
-    /*private void printLocationInfo(){
-    System.out.println(currentRoom.getLongDescription());
-
-    System.out.println();
-    }*/
 }
