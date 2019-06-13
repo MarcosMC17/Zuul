@@ -42,6 +42,7 @@ public class Game
         Item movil = new Item("movil", "AiFon de ultima generacion", 1, true);
         Item libro = new Item("libro", "Libro de programacion basica en java", 500, false);
         Item ropaSucia = new Item("ropaSucia", "Un monton de ropa sucia para lavar", 20, true);
+        Item cervecita = new Item("cervecita", "Cervecita bien fresquita", 0, true);
         // create the rooms
         miHabitacion = new Room("Mi habitación, la misma que tu madre te dice que recojas todos los dias");
         miBanio = new Room("Mi bañó, sin limpiar desde 1945");
@@ -75,6 +76,7 @@ public class Game
         salon.addItem("movil", movil);
         salon.addItem("libro", libro);
         miHabitacion.addItem("ropaSucia",ropaSucia);
+        cocina.addItem("cervecita", cervecita);
         return miHabitacion;  // start game outside
     }
 
@@ -150,6 +152,9 @@ public class Game
         }
         else if (commandWord.equals("items")) {
             player.items();
+        }
+        else if (commandWord.equals("beber")) {
+            player.objetoEspecial(command);
         }
 
         return wantToQuit;

@@ -116,4 +116,20 @@ public class Player
             System.out.println("No llevas ese objeto en la mochila");
         }
     }
+
+    /*public void objetoEspecial(Command command){
+        if(command.getSecondWord().equals("cervecita")){
+            if(mochila.containsKey(command.getSecondWord())){
+                mochila.remove(command.getSecondWord());
+                pesoMax = pesoMax * 1000;
+                System.out.println("Acabas de ingerir escarcha pura para romper tus alveolos, tu peso maximo es multiplicado por mil, ahora puedes llevar " + pesoMax + " kg encima");
+            }
+            else{
+                System.out.println("No llevas ese objeto en la mochila");
+            }
+        }
+        else{
+                System.out.println("Yo no me beberia eso, si es que se puede beber");
+            }
+    }*/
 }
