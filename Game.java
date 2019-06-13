@@ -146,19 +146,13 @@ public class Game
         }
         /*else if (commandWord.equals("drop")) {
             drop(command);
-        }
-        else if (commandWord.equals("items")) {
-            items();
         }*/
+        else if (commandWord.equals("items")) {
+            player.items();
+        }
 
         return wantToQuit;
     }
-
-    /*private void look() {   
-    System.out.println(currentRoom.getLongDescription());
-    }**/
-
-    // implementations of user commands:
 
     /**
      * Print out some help information.
@@ -174,15 +168,6 @@ public class Game
         System.out.println(parser.showCommands());
 
     }
-
-    /*private void items(){
-        String itemsMochila = "";
-        Collection <Item> objItem = mochila.values();
-        for(Item objActual : objItem){
-            itemsMochila = itemsMochila + "\n" + objActual.getInfoItem();
-        }
-        System.out.println(itemsMochila);
-    }*/
 
     /*private void drop(Command command){
         String obj = command.getSecondWord();

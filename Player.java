@@ -89,4 +89,13 @@ public class Player
         }
 
     }
+    
+    public void items(){
+        String itemsMochila = "Total en kg: " + pesoMochila + "\n";
+        Collection <Item> objItem = mochila.values();
+        for(Item objActual : objItem){
+            itemsMochila = itemsMochila + "\n" + objActual.getInfoItem();
+        }
+        System.out.println(itemsMochila);
+    }
 }
