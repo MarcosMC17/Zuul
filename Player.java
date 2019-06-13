@@ -73,10 +73,15 @@ public class Player
     public void take(Command command){
         String obj = command.getSecondWord();
         if(currentRoom.getItem(obj) != null){
-            mochila.put(obj, currentRoom.getItem(obj));
-            int pesoItem = currentRoom.getItem(obj).getPeso();
-            currentRoom.eliminarItem(obj);                    
-            pesoMochila = pesoMochila + pesoItem;
+            if(currentRoom.getItem(obj).getSePuedeCoger()){
+                mochila.put(obj, currentRoom.getItem(obj));
+                int pesoItem = currentRoom.getItem(obj).getPeso();
+                currentRoom.eliminarItem(obj);                    
+                pesoMochila = pesoMochila + pesoItem;
+            }
+            else{
+                System.out.println("Ese objeto no se puede recoger");
+            }
         }
 
         else{
