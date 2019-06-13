@@ -24,7 +24,7 @@ public class Room
     private Room southEastExit;
     private Room northWestExit;
     private HashMap<String, Room> exits;
-    private ArrayList<Item> objetos = new ArrayList<Item>();
+    private HashMap<String, Item> objetos;
 
     /**
      * Create a room described "description". Initially, it has
@@ -36,6 +36,7 @@ public class Room
     {
         this.description = description;
         exits = new HashMap<>();
+        objetos = new HashMap<>();
     }
 
     /**
@@ -85,9 +86,18 @@ public class Room
         return exitsDesc;
     }
     
-    public void addItem(Item objeto){
-        objetos.add(objeto);
+    public void addItem(String nombre, Item objeto){
+        objetos.put(nombre, objeto);
     }
+    
+    public Item getItem(String nombreObj){
+        return objetos.get(nombreObj);
+    }
+    
+    public void eliminarItem(String nObjeto){
+        objetos.remove(nObjeto);
+    }
+    
     
     /**
      * Devuelve un texto con la descripcion larga de la habitacion del tipo:
@@ -98,8 +108,9 @@ public class Room
     public String getLongDescription(){
         String desc = "You are " + description + "\n" + getExitString();
         if(objetos.size() >= 1){
-            for(Item objetoActual : objetos){
-                desc = desc + "\n" + objetoActual.getInfoItem();
+            Collection <Item> objItem = objetos.values();
+            for(Item objActual : objItem){
+                desc = desc + "\n" + objActual.getInfoItem();
             }
         }
         return desc;

@@ -4,11 +4,15 @@ public class Item
 {
     private String descripcion;
     private int peso;
+    private boolean sePuedeCoger;
+    private String id;
 
-    public Item(String descripcion, int peso) 
+    public Item(String id, String descripcion, int peso, boolean sePuedeCoger) 
     {
+        this.id=id;
         this.descripcion = descripcion;
         this.peso = peso;
+        this.sePuedeCoger = sePuedeCoger;
     }
 
     /**
@@ -23,7 +27,16 @@ public class Item
     }
 
     public String getInfoItem(){
-        String infoItem = descripcion + "\n" + peso + " kg";
+        String infoItem = id + ": " + descripcion + "\n" + peso + " kg";
         return infoItem;
     }
+    
+    public String getId()    {
+        return id;
+    }
+    
+    public boolean getSePuedeCoger(){
+        return sePuedeCoger;
+    }
+    
 }
